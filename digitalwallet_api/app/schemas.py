@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
 
 class WalletCreate(BaseModel):
     owner_name: str
@@ -26,3 +26,27 @@ class TransactionResponse(BaseModel):
     amount: float
     type: str
     description: Optional[str]
+
+class MerchantCreate(BaseModel):
+    name: str
+    description: Optional[str] = None
+
+class MerchantResponse(BaseModel):
+    id: int
+    name: str
+    description: Optional[str]
+
+class ItemCreate(BaseModel):
+    name: str
+    price: float
+    description: Optional[str]
+    transaction_id: int
+    merchant_id: int
+
+class ItemResponse(BaseModel):
+    id: int
+    name: str
+    price: float
+    description: Optional[str]
+    transaction_id: int
+    merchant_id: int

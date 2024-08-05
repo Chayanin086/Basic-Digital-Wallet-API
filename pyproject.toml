@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "homework01"
+version = "0.1.0"
+description = ""
+authors = ["Chayanin086 <cyninn.4@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.111.1"
+sqlmodel = "^0.0.21"
+pg8000 = "^1.31.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,5 +1,5 @@
 from sqlmodel import Session, select
-from app.models import Wallet, Transaction
+from app.models import Wallet, Transaction, Merchant, Item
 
 def create_wallet(session: Session, wallet: Wallet) -> Wallet:
     session.add(wallet)
@@ -33,3 +33,49 @@ def create_transaction(session: Session, transaction: Transaction) -> Transactio
 def get_transactions_by_wallet(session: Session, wallet_id: int):
     statement = select(Transaction).where(Transaction.wallet_id == wallet_id)
     return session.exec(statement).all()
+
+def create_merchant(session: Session, merchant: Merchant) -> Merchant:
+    session.add(merchant)
+    session.commit()
+    session.refresh(merchant)
+    return merchant
+
+def get_merchant(session: Session, merchant_id: int) -> Merchant:
+    return session.get(Merchant, merchant_id)
+
+def update_merchant(session: Session, merchant_id: int, merchant_data: dict) -> Merchant:
+    merchant = session.get(Merchant, merchant_id)
+    for key, value in merchant_data.items():
+        setattr(merchant, key, value)
+    session.add(merchant)
+    session.commit()
+    session.refresh(merchant)
+    return merchant
+
+def delete_merchant(session: Session, merchant_id: int):
+    merchant = session.get(Merchant, merchant_id)
+    session.delete(merchant)
+    session.commit()
+
+def create_item(session: Session, item: Item) -> Item:
+    session.add(item)
+    session.commit()
+    session.refresh(item)
+    return item
+
+def get_item(session: Session, item_id: int) -> Item:
+    return session.get(Item, item_id)
+
+def update_item(session: Session, item_id: int, item_data: dict) -> Item:
+    item = session.get(Item, item_id)
+    for key, value in item_data.items():
+        setattr(item, key, value)
+    session.add(item)
+    session.commit()
+    session.refresh(item)
+    return item
+
+def delete_item(session: Session, item_id: int):
+    item = session.get(Item, item_id)
+    session.delete(item)
+    session.commit()
