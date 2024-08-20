@@ -31,3 +31,10 @@ class Item(SQLModel, table=True):
     merchant_id: int = Field(foreign_key="merchant.id")
     transaction: Optional[Transaction] = Relationship(back_populates="items")
     merchant: Optional[Merchant] = Relationship(back_populates="items")
+
+class User(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    username: str = Field(index=True, unique=True)
+    hashed_password: str
+    is_active: bool = True
+    is_superuser: bool = False
